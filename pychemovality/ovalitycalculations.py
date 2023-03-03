@@ -8,9 +8,14 @@ from pychemovality.fileoperations import (
 from rdkit.Chem.rdmolfiles import MolFromPDBFile, MolFromXYZFile, MolFromMolFile
 from pychemovality.constants import vanderwaals_radii
 from pychemovality.classes import AreaVolumeCalculator
+from rdkit.Chem import PropertyMol
+from pychemovality.classes import FilePathManager
+from typing import Dict
 
 
-def create_xyzr_file(mol, vanderwaals_radii, fpm):
+def create_xyzr_file(
+    mol: PropertyMol, vanderwaals_radii: Dict[str, float], fpm: FilePathManager
+):
     conformer = mol.GetConformers()[0]
     num_atoms = 0
     for _ in mol.GetAtoms():
@@ -34,7 +39,7 @@ def create_xyzr_file(mol, vanderwaals_radii, fpm):
             f.write(f"{line}\n")
 
 
-def get_area_and_volume_from_output_logs(log_calc_txt_file_path):
+def get_area_and_volume_from_output_logs(log_calc_txt_file_path: str):
     with open(log_calc_txt_file_path) as f:
         line_output_file = f.readlines()
 
@@ -47,25 +52,27 @@ def get_area_and_volume_from_output_logs(log_calc_txt_file_path):
     return area, volume
 
 
-def get_ovality(area, volume):
+def get_ovality(area: float, volume: float) -> float:
     minimum_area = (3 * volume) ** (2 / 3) * (4 * math.pi) ** (1 / 3)
     ovality = area / minimum_area
 
     return ovality
 
 
-def write_molecular_area_and_volume_to_logs(avc, fpm):
+def write_molecular_area_and_volume_to_logs(
+    avc: AreaVolumeCalculator, fpm: FilePathManager
+):
     run_string = f"{fpm.calc_script} {fpm.output_molecule_title} {fpm.output_xyzr_file_path} {fpm.sphf} {avc.rd} {avc.ofac} {avc.rmin} {avc.ndiv} {avc.dvec} {avc.vec_file} {avc.display_file} {avc.ksurf} {avc.redu} {avc.pvec} {avc.psph} {avc.pdis} {avc.ass1} {avc.lpr} {fpm.out_calc_log_file}"
     subprocess.check_output(run_string, shell=True)
 
 
-def get_molecule_name_from_coord_file(coord_filepath):
+def get_molecule_name_from_coord_file(coord_filepath: str):
     coord_filename = os.path.basename(coord_filepath)
     output_molecule_title = os.path.splitext(coord_filename)[0]
     return output_molecule_title
 
 
-def get_mol_from_coord_file(coord_filepath):
+def get_mol_from_coord_file(coord_filepath: str) -> PropertyMol:
     coord_filename = os.path.basename(coord_filepath)
     coord_file_ext = os.path.splitext(coord_filename)[1]
 
@@ -83,7 +90,7 @@ def get_mol_from_coord_file(coord_filepath):
     return mol
 
 
-def calculate_ovality(root_dir, coord_filepath):
+def calculate_ovality(root_dir: str, coord_filepath: str) -> float:
     mol = get_mol_from_coord_file(coord_filepath)
     output_molecule_title = get_molecule_name_from_coord_file(coord_filepath)
     fpm = create_filepath_manager(root_dir, output_molecule_title)
@@ -98,7 +105,7 @@ def calculate_ovality(root_dir, coord_filepath):
     return ovality
 
 
-def get_spheroid_type(ovality):
+def get_spheroid_type(ovality: float) -> str:
     if ovality > 1:
         spheroid_type = "oblate"
     else:

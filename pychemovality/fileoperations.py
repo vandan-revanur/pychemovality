@@ -4,7 +4,9 @@ from pychemovality.classes import FilePathManager
 from sys import platform
 
 
-def create_filepath_manager(root_dir, output_molecule_title):
+def create_filepath_manager(
+    root_dir: str, output_molecule_title: str
+) -> FilePathManager:
     root_dir = os.path.join(root_dir, "pychemovality")
     output_dir = os.path.join(root_dir, "output")
     os.makedirs(output_dir, exist_ok=True)
@@ -32,6 +34,6 @@ def create_filepath_manager(root_dir, output_molecule_title):
     return fpm
 
 
-def remove_existing_log_file(out_calc_log_file):
+def remove_existing_log_file(out_calc_log_file: str):
     if os.path.exists(out_calc_log_file):
         os.remove(out_calc_log_file)
