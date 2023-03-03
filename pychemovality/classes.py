@@ -9,7 +9,6 @@ class FilePathManager():
   output_xyzr_file_path : str
   sphf: str
   calc_script: str
-  pdb_file : str
   out_calc_log_file : str
 
 

@@ -40,7 +40,6 @@ def create_filepath_manager(
     else:
         raise OSError(f"{platform} OS is not supported")
 
-    pdb_file = os.path.join(root_dir, f"../input", f"{output_molecule_title}.pdb")
     out_calc_log_file = os.path.join(output_dir, "output_calc_log.txt")
     fpm = FilePathManager(
         root_dir,
@@ -49,7 +48,6 @@ def create_filepath_manager(
         output_xyzr_file_path,
         sphf,
         calc_script,
-        pdb_file,
         out_calc_log_file,
     )
 
