@@ -5,13 +5,16 @@
 
 pychemovality is a python library for estimating the ovality of molecules. 
 
-The library consists of two parts:
+The library consists of three parts:
 
-1. **Python Wrapper**:
-This part creates provides a nice interface to create files necessary for the core calcultion of ovality. Here we create the XYZR file that is used downstream by the ovality core calcultion.
-2. **Ovality Core Calculation**:
-The core calculation takes place inside a Fortran executable that is created 
-by compiling a modified version of the original [Gepol93](http://www.ccl.net/cca/software/SOURCES/FORTRAN/molecular_surface/gepol93/) Fortran script. This script calculates various molecular surface area such as the Vanderwaals surface area, the molecular surface area and solvent-excluding surface (SES) area and the corresponding volume. For the ovality calculation we use the SES area.
+1. **Input File Generation**:
+This part creates an XYZR file necessary for the calculations downstream.
+2. **Calculating SES Area and Volume**:
+The SES area and volume calculation takes place inside a Fortran executable that is created 
+by compiling a modified version of the original [Gepol93](http://www.ccl.net/cca/software/SOURCES/FORTRAN/molecular_surface/gepol93/) Fortran script. 
+This script provides the possibility to calculate various molecular surface area such as the Vanderwaals surface area, the molecular surface area and solvent-excluding surface (SES) area and the corresponding volume. For the ovality calculation we use the SES area.
+3. **Calculate Ovality**:
+Utilize area and volume to calculate ovality
 
 Modifications made to the original Fortran 77 code:
 
