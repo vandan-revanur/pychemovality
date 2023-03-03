@@ -21,14 +21,14 @@ Modifications made to the original Fortran 77 code:
 - Made the fortran code compatible with latest gfortran for compilation into an executable 
 
 
-## Installing
-Install the library using pip:
-
-```
-pip install git+https://github.com/vandan-revanur/pychemovality
-```
 
 ## Usage
+
+Clone the repo and cd into root dir:
+```
+git clone https://github.com/vandan-revanur/pychemovality 
+cd pychemovality
+```
 
 Three types of coordinate files can be used as input for calculating ovality.
 * XYZ file
@@ -37,7 +37,7 @@ Three types of coordinate files can be used as input for calculating ovality.
 
 To get the ovality of the molecule in your coordinate file run the following:
 ```
-pychemovality --coord-file-path <path-to-your-coord-file>
+python pychemovality --coord-file-path <path-to-your-coord-file>
 ```
 
 ## Fortran Code Compilation
