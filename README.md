@@ -8,7 +8,8 @@ pychemovality is a python library for estimating the ovality of molecules.
 The library consists of three parts:
 
 1. **Input File Generation**:
-This part creates an XYZR file necessary for the calculations downstream.
+This part creates an XYZR file necessary for the calculations downstream. 
+XYZ refers to coordinates and R refers to the vanderwaals radii. 
 2. **Calculating SES Area and Volume**:
 The SES area and volume calculation takes place inside a Fortran executable that is created 
 by compiling a modified version of the original [Gepol93](http://www.ccl.net/cca/software/SOURCES/FORTRAN/molecular_surface/gepol93/) Fortran script. 
