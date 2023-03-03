@@ -1,6 +1,10 @@
 import os
 import argparse
-from pychemovality.ovalitycalculations import calculate_ovality, get_spheroid_type
+from pychemovality.ovalitycalculations import (
+    calculate_area_and_volume,
+    get_spheroid_type,
+    calculate_ovality,
+)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
@@ -13,7 +17,8 @@ if __name__ == "__main__":
     root_dir = os.getcwd()
     print(root_dir)
 
-    ovality = calculate_ovality(root_dir, coord_filepath)
+    area, volume = calculate_area_and_volume(root_dir, coord_filepath)
+    ovality = calculate_ovality(area, volume)
 
     spheroid_type = get_spheroid_type(ovality)
     print("ovality: ", ovality)
