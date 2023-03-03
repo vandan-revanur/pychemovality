@@ -396,10 +396,10 @@ C***************************************************************************
       REAL*8 CV
       REAL*8 STOT,VOL
 
-      CHARACTER*80 DISF,COOF,SPHF,TIT,VECF
+      CHARACTER*5000 DISF,COOF,SPHF,TIT,VECF
       CHARACTER*33 LABEL
       CHARACTER*5  KSURF
-      CHARACTER*2000 OUTF_LOG
+      CHARACTER*5000 OUTF_LOG
       
       PARAMETER (MC=100000,MV=100000)
       
@@ -630,7 +630,7 @@ C     ------------------------------------------------------------------
 
       CHARACTER*5 KEY,KSURF
       
-      CHARACTER*80 COOF,DISF,LINE,SPHF,VECF, TIT
+      CHARACTER*5000 COOF,DISF,LINE,SPHF,VECF, TIT
    
       CHARACTER*80 ARG_KSURF
       CHARACTER*80 ARG_RD, ARG_OFAC, ARG_RMIN, ARG_NDIV, ARG_DVEC
@@ -762,7 +762,7 @@ C     ---------------------------------------------------------------
       REAL*4 ZE
 
       CHARACTER*33 LABEL
-      CHARACTER*80 COOF
+      CHARACTER*5000 COOF
       CHARACTER*80 TITULO
       
       PARAMETER (MC=100000)

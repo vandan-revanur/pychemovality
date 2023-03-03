@@ -15,7 +15,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     coord_filepath = args.coord_file_path
     root_dir = os.getcwd()
-    print(root_dir)
 
     area, volume = calculate_area_and_volume(root_dir, coord_filepath)
     ovality = calculate_ovality(area, volume)
