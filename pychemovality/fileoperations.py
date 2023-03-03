@@ -2,6 +2,7 @@ import os
 import subprocess
 from pychemovality.classes import FilePathManager
 from sys import platform
+import sys
 
 
 def create_filepath_manager(
@@ -22,16 +23,22 @@ def create_filepath_manager(
     FilePathManager
     A FilePathManager object
     """
-    root_dir = os.path.join(root_dir, "pychemovality")
+    root_dir = os.path.realpath(sys.path[0])
     output_dir = os.path.join(root_dir, "output")
     os.makedirs(output_dir, exist_ok=True)
     output_xyzr_file_path = os.path.join(output_dir, f"{output_molecule_title}.xyzr")
     sphf = os.path.join(output_dir, f"{output_molecule_title}.SPH")
-    if "win" in platform:
+
+    if platform in ["win32", "win64"]:
         calc_script = os.path.join(root_dir, "fortran", "gepol93_with_args.exe")
-    else:
-        calc_script = os.path.join(root_dir, "fortran", "gepol93_with_args.out")
+    elif platform == "linux":
+        calc_script = os.path.join(root_dir, "fortran", "gepol93_with_args_linux.out")
         subprocess.check_output(f"chmod +x {calc_script}", shell=True)
+    elif platform == "darwin":
+        calc_script = os.path.join(root_dir, "fortran", "gepol93_with_args_osx.out")
+        subprocess.check_output(f"chmod +x {calc_script}", shell=True)
+    else:
+        raise OSError(f"{platform} OS is not supported")
 
     pdb_file = os.path.join(root_dir, f"../input", f"{output_molecule_title}.pdb")
     out_calc_log_file = os.path.join(output_dir, "output_calc_log.txt")
