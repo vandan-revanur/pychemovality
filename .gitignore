@@ -1,3 +1,5 @@
 venv
 pychemovality/input
 pychemovality/output
+pychemovality/__pycache__/
+.idea
