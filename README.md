@@ -45,7 +45,7 @@ python pychemovality --coord-file-path <path-to-your-coord-file>
 ```
 
 ## Fortran Code Compilation
-If you would like to compile the Fortran code residing in the [Fortran](pychemovality/fortran/GEPOL93_modified.FOR) directory of the repo, instructions are available in the [Compilation Instructions](fortran_compilation_instructions.md)
+If you would like to compile the Fortran code residing in the [Fortran](pychemovality/fortran/GEPOL93_modified.FOR) directory of the repo, instructions are available in the [Compilation Instructions](docs/fortran_compilation_instructions.md)
 
 
 ## Authors
